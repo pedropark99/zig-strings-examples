@@ -6,18 +6,12 @@ const input_string =
 ;
 
 pub fn main() !void {
-    var string_items = std.ArrayList([]const u8)
-        .init(std.heap.page_allocator);
+    const delimiter = '\n';
+    var split_iterator = std.mem.splitScalar(u8, input_string, delimiter);
 
-    var begin_index: usize = 0;
-    for (input_string, 0..) |char, char_index| {
-        if (char == '\n') {
-            try string_items.append(input_string[begin_index..char_index]);
-            begin_index = char_index + 1;
-        }
-    }
-
-    for (string_items) |item| {
-        std.debug.print("{s}", item);
+    var index: usize = 1;
+    while (split_iterator.next()) |item| {
+        std.debug.print("Item of number {d} is: {s}\n", .{ index, item });
+        index = index + 1;
     }
 }
