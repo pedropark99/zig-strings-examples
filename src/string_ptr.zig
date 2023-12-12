@@ -32,14 +32,15 @@ const simple_array = [_]i32{ 1, 2, 3, 4 };
 pub fn main() !void {
     // Now, we can check the type of both objects using the @TypeOf() function.
     //
-    // If we look at the simple_array object, we find that this object is a array of 4 elements,
-    // or, an object of type `[4]i32`.
+    // If we look at the type of the `simple_array` object, you will find that this object is a array of 4 elements.
+    // Each element is a signed integer of 32 bits (`i32`). That is what an object of type `[4]i32` is.
     print("Type of array object: {}\n", .{@TypeOf(simple_array)});
-    // But if we look at the string object, you will find that this object is a constant pointer (`*const`) to an array
-    // of 43 elements (or 43 bytes), that is why we have the `[43:0]u8` portion of the type below.
+    // But if we look closely at the type of the string object, you will find that this object is a constant pointer (`*const`) to an array
+    // of 43 elements (or 43 bytes). Each element is a single byte (more precisely, an unsigned 8 bit integer), that is why we have the `[43:0]u8` portion of the type below.
     // In other words, the string stored inside the `string_literal` object is 43 bytes long.
     print("Type of string object: {}\n", .{@TypeOf(string_literal)});
     // Now, if we create an pointer to the array object, then, we get a constant pointer to an array of 4 elements (`*const [4]i32`),
-    // which is very similar to the type of the string object.
+    // which is very similar to the type of the string object. This demonstrates that a string object (or a string literal) in Zig is already
+    // a pointer to an array. Just remember that a "pointer to an array" is different than an "array".
     print("Type of a pointer that points to the array object: {}\n", .{@TypeOf(&simple_array)});
 }
